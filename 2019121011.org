@@ -1,3 +1,14 @@
+Transition System Defination
+S_{max} = \langle X, X^o, U, \to, Y, h \rangle
+1. Input Space = R^n
+2. State Space = R^n x Z
+3. rho(x) = (x,n-1) where x \in R^n
+4. X = R^n x Z
+5. X^o = rho(A)
+6. U = {next}
+7. (x,a) \to (x',b) where, b = a+1 if a<|x| else b = a; \forall 0<i<b, x'[i]<x'[i+1]
+
+Program
 begin src
 datatype StateSpace = StateSpace(arr: array<int>,st: int)
 
@@ -137,3 +148,15 @@ method Main()
 
 }
 end src
+
+Pre Condition:
+requires initialState.arr != null;
+requires initialState.arr.Length > 0;
+requires initialState.st == 0;
+
+Post Condition:
+ensures finalState.arr !=null;
+ensures sorted(finalState.arr, 0, finalState.arr.Length);
+ensures multiset(initialState.arr[..]) == multiset(finalState.arr[..]);
+ensures finalState.arr.Length == initialState.arr.Length;
+ensures finalState.st == initialState.arr.Length;
